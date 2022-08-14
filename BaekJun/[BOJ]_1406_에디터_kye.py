@@ -10,3 +10,24 @@
 # 출력
 # 첫째 줄에 모든 명령어를 수행하고 난 후 편집기에 입력되어 있는 문자열을 출력한다.
 
+import sys
+
+string_list = list(sys.stdin.readline()) # 문자열을 list 한다
+cursor = len(string_list) # 문자열 길이
+
+for _ in range(int(input())):
+    command = list(sys.stdin.readline()) # 명령값
+    if command[0] == 'P':
+        string_list.insert(cursor, command[1]) # 문자열 길이만큼 이동 후 command[1] 입력
+        cursor += 1 # 문자 1개 추가되었으니 +1
+    elif command[0] == 'L': 
+        if cursor > 0: 
+            cursor -= 1  # L은 [1]부터 맨 뒤자리에서만 의미있다. 0은 의미가 없다. cursor -1 해서 커서를 왼쪽으로 옮긴다. 
+    elif command[0] == 'D':
+        if cursor < len(string_list): 
+            cursor += 1  # D는 [0]부터 len(string_list)-1 에서만 의미있다. 맨 뒤는 의미가 없다. cursor +1 해서 커서를 오른쪽으로 옮긴다.  
+    else:
+        if cursor > 0:
+            string_list.remove(string_list[cursor-1]) # B 커서는 문장의 맨 뒤에 있다. 따라서, 왼쪽 문자열을 지우기위해 전체 문자열 길이 - 1의 인덱스를 넣어야함. 
+
+print(''.join(string_list))
