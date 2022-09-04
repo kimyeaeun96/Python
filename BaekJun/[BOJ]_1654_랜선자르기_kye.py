@@ -7,5 +7,22 @@
 #첫째 줄에 N개를 만들 수 있는 랜선의 최대 길이를 센티미터 단위의 정수로 출력한다.
 
 import sys
-K = sys.stadin.readline() #오영식이 이미 가지고 있는 랜선의 개수 K
-N = sys.stadin.readline() #필요한 랜선의 개수 N
+k, n = map(int, sys.stdin.readline().split()) #오영식이 이미 가지고 있는 랜선의 개수 K, 필요한 랜선의 개수 N
+arr = []
+
+for i in range(k):
+    arr.append(int(input())) # 이미 가지고 있는 각 랜선의 길이가 배열 안에 들어간다. 
+
+start = 1
+end = max(arr) 
+
+while (start <= end):
+    mid = (start + end) // 2
+    cnt = 0  # cnt = 자른 랜선 개수
+    for i in range(k):
+        cnt += arr[i] // mid
+    if cnt >= n:
+        start = mid + 1
+    else:
+        end = mid - 1
+print(end) 
